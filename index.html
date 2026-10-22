@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clase de C# 5: Modificadores de Acceso y Encapsulamiento</title>
+    <style>
+        /* Reglas globales bajo especificación APA: Todo el texto en negro, tipografía Arial */
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 12pt;
+            color: #000000;
+            background-color: #f9f9f9;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border: 1px solid #000000;
+            padding: 40px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        /* Encabezados en estricto color negro */
+        h1, h2, h3 {
+            color: #000000;
+            font-weight: bold;
+            margin-top: 1.5em;
+            margin-bottom: 0.5em;
+        }
+
+        h1 {
+            font-size: 18pt;
+            text-align: center;
+            border-bottom: 2px solid #000000;
+            padding-bottom: 10px;
+        }
+
+        h2 {
+            font-size: 14pt;
+            border-bottom: 1px solid #000000;
+            padding-bottom: 5px;
+        }
+
+        h3 {
+            font-size: 12pt;
+        }
+
+        p, li {
+            font-size: 12pt;
+            color: #000000;
+            text-align: justify;
+        }
+
+        ul, ol {
+            margin-left: 20px;
+        }
+
+        .card {
+            border: 1px solid #000000;
+            padding: 15px;
+            margin: 20px 0;
+            background-color: #ffffff;
+        }
+
+        /* Estilo para los bloques de código fuente C# */
+        pre {
+            background-color: #f4f4f4;
+            border: 1px solid #000000;
+            padding: 15px;
+            font-family: "Courier New", Courier, monospace;
+            font-size: 10.5pt;
+            color: #000000;
+            overflow-x: auto;
+            white-space: pre-wrap;
+        }
+
+        code {
+            font-family: "Courier New", Courier, monospace;
+            color: #000000;
+        }
+
+        .nota-didactica {
+            background-color: #f9f9f9;
+            border-left: 4px solid #000000;
+            padding: 10px 15px;
+            margin: 15px 0;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <h1>Clase Interactiva: Modificadores de Acceso y Encapsulamiento en C# 5</h1>
+
+    <p><strong>Asignatura:</strong> Programación Orientada a Objetos<br>
+    <strong>Lenguaje objetivo:</strong> C# (Versión 5.0 / .NET Framework 4.5)</p>
+
+    <h2>1. ¿Qué es el Encapsulamiento y para qué sirve?</h2>
+    <p>El <strong>encapsulamiento</strong> es uno de los cuatro pilares fundamentales de la Programación Orientada a Objetos (POO). Consiste en ocultar los detalles internos de implementación de una clase y proteger el estado interno del objeto prohibiendo el acceso directo a sus variables miembro (campos).</p>
+    <p><strong>¿Para qué sirve?</strong></p>
+    <ul>
+        <li><strong>Control e Integridad de Datos:</strong> Previene que el código externo asigne valores no válidos o corruptos a las variables internas.</li>
+        <li><strong>Flexibilidad y Mantenimiento:</strong> Permite cambiar el funcionamiento interno de una clase sin romper el código de los programas que la utilizan.</li>
+        <li><strong>Seguridad:</strong> Limpia la interfaz del objeto exponiendo únicamente lo necesario para interactuar con él.</li>
+    </ul>
+
+    <h2>2. Modificadores de Acceso en C# 5</h2>
+    <p>Los modificadores de acceso son palabras clave utilizadas para especificar la visibilidad y el alcance de los miembros (atributos, propiedades, métodos) dentro de una clase.</p>
+
+    <div class="card">
+        <h3>A. Modificador <code>public</code> (Público)</h3>
+        <p><strong>¿Para qué sirve?</strong> Permite acceso ilimitado. El miembro puede ser accedido desde cualquier parte del código, ya sea dentro del mismo ensamblado o desde otros proyectos que hagan referencia a él.</p>
+        <pre><code>// Ejemplo: Método público expuesto a todo el sistema
+public void MostrarInformacion()
+{
+    Console.WriteLine("Acceso permitido desde cualquier lugar.");
+}</code></pre>
+    </div>
+
+    <div class="card">
+        <h3>B. Modificador <code>private</code> (Privado)</h3>
+        <p><strong>¿Para qué sirve?</strong> Restringe el acceso exclusivamente al interior de la propia clase donde se declara. Es la piedra angular del encapsulamiento estricto.</p>
+        <pre><code>// Ejemplo: Campo privado que solo la clase puede manipular directamente
+private decimal _saldoCuenta;</code></pre>
+    </div>
+
+    <div class="card">
+        <h3>C. Modificador <code>protected</code> (Protegido)</h3>
+        <p><strong>¿Para qué sirve?</strong> El miembro es accesible dentro de la clase que lo declara y dentro de cualquier clase derivada (herencia), incluso si está en otro ensamblado.</p>
+        <pre><code>// Ejemplo: Atributo protegido usable en clases hijas mediante herencia
+protected string NumeroTransaccion;</code></pre>
+    </div>
+
+    <div class="card">
+        <h3>D. Modificador <code>internal</code> (Interno)</h3>
+        <p><strong>¿Para qué sirve?</strong> Permite el acceso desde cualquier código que forme parte del mismo proyecto o ensamblado (compilado .dll/.exe), pero no desde archivos ejecutables o bibliotecas externas.</p>
+        <pre><code>// Ejemplo: Clase o miembro visible únicamente dentro del mismo compilado
+internal class ModuloInterno
+{
+    internal static void Procesar() { }
+}</code></pre>
+    </div>
+
+    <div class="card">
+        <h3>E. Modificador <code>protected internal</code> (Protegido Interno)</h3>
+        <p><strong>¿Para qué sirve?</strong> Es una combinación OR: el miembro es accesible por cualquier código del mismo ensamblado <em>O</em> por clases derivadas en otros ensamblados.</p>
+    </div>
+
+    <h2>3. Ejemplo Práctico Integrador en C# 5</h2>
+    <p>A continuación se presenta el código completo en C# 5 que demuestra la aplicación del encapsulamiento (usando campos privados con propiedades de auto-implementación o getters/setters) y la interacción de los modificadores de acceso:</p>
+
+    <pre><code>using System;
+
+namespace ClaseDemostraciónCSharp5
+{
+    // Clase Base que representa una Cuenta Bancaria
+    public class CuentaBancaria
+    {
+        // 1. Campo PRIVADO: Oculto para el exterior (Encapsulamiento estricto)
+        private decimal _saldo;
+
+        // 2. Campo PROTEGIDO: Accesible solo en esta clase y por sus hijas
+        protected string CodigoAuditoria;
+
+        // 3. Propiedad PÚBLICA: Controla el acceso seguro al campo privado
+        public string Titular { get; private set; } // Propiedad auto-implementada de C# 5
+
+        // Propiedad con validación lógica para garantizar integridad
+        public decimal Saldo
+        {
+            get { return _saldo; }
+        }
+
+        // Constructor Público
+        public CuentaBancaria(string titular, decimal saldoInicial)
+        {
+            Titular = titular;
+            if (saldoInicial >= 0)
+            {
+                _saldo = saldoInicial;
+            }
+            else
+            {
+                _saldo = 0;
+            }
+            CodigoAuditoria = "AUD-" + Guid.NewGuid().ToString().Substring(0, 8);
+        }
+
+        // Método PÚBLICO para alterar el estado interno de forma segura
+        public bool Depositar(decimal monto)
+        {
+            if (monto > 0)
+            {
+                _saldo += monto;
+                RegistrarOperacion("Depósito de: " + monto);
+                return true;
+            }
+            return false;
+        }
+
+        // Método PRIVADO: Auxiliar de lógica interna
+        private void RegistrarOperacion(string mensaje)
+        {
+            Console.WriteLine("[LOG INTERNO]: " + mensaje);
+        }
+
+        // Método INTERNAL: Accesible solo dentro de este mismo proyecto/ensamblado
+        internal string ObtenerReporteRápido()
+        {
+            return "Titular: " + Titular + " | Saldo actual: $" + _saldo;
+        }
+    }
+
+    // Clase Derivada (Demuestra uso del modificador 'protected')
+    public class CuentaAhorro : CuentaBancaria
+    {
+        public decimal TasaInteres { get; set; }
+
+        public CuentaAhorro(string titular, decimal saldoInicial, decimal tasa) 
+            : base(titular, saldoInicial)
+        {
+            TasaInteres = tasa;
+        }
+
+        public void ImprimirAuditoria()
+        {
+            // Acceso permitido al miembro PROTEGIDO de la clase padre
+            Console.WriteLine("Código de Auditoría asignado: " + CodigoAuditoria);
+            
+            // ERROR DE COMPILACIÓN SI DESCOMENTA LA SIGUIENTE LÍNEA:
+            // Console.WriteLine(_saldo); // Error: '_saldo' es PRIVADO en la clase base.
+        }
+    }
+
+    // Programa Principal
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("=== DEMOSTRACIÓN DE ENCAPSULAMIENTO Y MODIFICADORES ===");
+
+            CuentaAhorro miCuenta = new CuentaAhorro("Juan Pérez", 1000m, 0.05m);
+
+            // Acceso a miembro PÚBLICO
+            Console.WriteLine("Titular: " + miCuenta.Titular);
+            Console.WriteLine("Saldo Inicial: $" + miCuenta.Saldo);
+
+            // Intento de alteración de saldo mediante método PÚBLICO validador
+            miCuenta.Depositar(500m);
+            Console.WriteLine("Saldo Tras Depósito: $" + miCuenta.Saldo);
+
+            // Acceso a miembro INTERNAL (Mismo ensamblado)
+            Console.WriteLine(miCuenta.ObtenerReporteRápido());
+
+            // Uso del método que accede a miembros PROTECTED
+            miCuenta.ImprimirAuditoria();
+
+            Console.ReadLine();
+        }
+    }
+}</code></pre>
+
+    <div class="nota-didactica">
+        <h3>Resumen Didáctico</h3>
+        <ul>
+            <li>Utilice <strong>private</strong> por defecto para los datos internos de la clase.</li>
+            <li>Exponga los datos mediante <strong>propiedades públicas</strong> o métodos con lógica de validación para implementar correctamente el <strong>encapsulamiento</strong>.</li>
+            <li>Utilice <strong>protected</strong> únicamente si planea permitir que clases derivadas adapten o lean ciertos estados internos.</li>
+            <li>Forzar el uso de <strong>HTTPS</strong> en su alojamiento de <strong>GitHub Pages</strong> asegura que el tráfico entre el navegador del estudiante o cliente y la página esté cifrado con un certificado digital confiable.</li>
+        </ul>
+    </div>
+
+</div>
+
+</body>
+</html>
